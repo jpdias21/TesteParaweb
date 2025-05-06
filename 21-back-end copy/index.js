@@ -7,7 +7,8 @@ const app = express();
 const port = 5000;
 
 app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json()); // Funcionalidade nativa do express
+
 
 const usuarios = []; // Aqui ficam os cadastros
 
