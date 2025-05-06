@@ -1,42 +1,317 @@
+// Tema Escuro - Arquivo único para toda a aplicação
+
+// Variáveis de cores do tema escuro
+$primary-color: #4e9cf5;
+$secondary-color: #2ac275;
+$accent-color: #ff8b3d;
+$background-color: #1a1a2e;
+$card-background: #222242;
+$text-color: #e1e1f0;
+$text-muted: #a1a1b5;
+$error-color: #ff6b6b;
+$success-color: #32d296;
+$border-color: #30304d;
+$input-background: #262647;
+$shadow-color: rgba(0, 0, 0, 0.3);
+$border-radius: 8px;
+$box-shadow: 0 4px 8px $shadow-color;
+$transition: all 0.3s ease;
+
+// Estilos globais
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: 'Roboto', Arial, sans-serif;
+  background-color: $background-color;
+  color: $text-color;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+// Animações
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba($primary-color, 0.7); }
+  70% { box-shadow: 0 0 0 10px rgba($primary-color, 0); }
+  100% { box-shadow: 0 0 0 0 rgba($primary-color, 0); }
+}
+
+// Componente BemVindo
+h1 {
+  color: $primary-color;
   text-align: center;
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+  margin: 2rem 0;
+  font-size: 2.5rem;
+  font-weight: 700;
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70px;
+    height: 3px;
+    background-color: $primary-color;
+    border-radius: 2px;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+button {
+  background-color: $primary-color;
+  color: $text-color;
+  border: none;
+  padding: 12px 22px;
+  margin: 10px;
+  border-radius: $border-radius;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: $transition;
+  box-shadow: $box-shadow;
+  
+  &:hover {
+    background-color: darken($primary-color, 10%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px $shadow-color;
+  }
+  
+  &:active {
+    transform: translateY(0);
+    box-shadow: $box-shadow;
+  }
+  
+  // Segundo botão (Login)
+  &:nth-of-type(2) {
+    background-color: $secondary-color;
+    
+    &:hover {
+      background-color: darken($secondary-color, 10%);
+    }
+  }
+  
+  // Terceiro botão (Encerrar)
+  &:nth-of-type(3) {
+    background-color: $error-color;
+    
+    &:hover {
+      background-color: darken($error-color, 10%);
+    }
   }
 }
 
-.card {
-  padding: 2em;
+// Componente Cadastrar e Login - Formulários
+form {
+  max-width: 500px;
+  margin: 30px auto;
+  padding: 30px;
+  background-color: $card-background;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+  animation: fadeIn 0.5s ease;
+  
+  h3 {
+    color: $primary-color;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: $text-color;
+  }
+  
+  input {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 5px;
+    background-color: $input-background;
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+    color: $text-color;
+    font-size: 1rem;
+    transition: $transition;
+    
+    &:focus {
+      border-color: $primary-color;
+      outline: none;
+      box-shadow: 0 0 0 2px rgba($primary-color, 0.2);
+    }
+    
+    &::placeholder {
+      color: $text-muted;
+    }
+  }
+  
+  div {
+    // Estilos para as mensagens de erro do Formik
+    color: $error-color;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    font-weight: 500;
+  }
+  
+  button {
+    width: 100%;
+    margin: 15px 0 0;
+    background-color: $primary-color;
+    
+    &:hover {
+      background-color: darken($primary-color, 10%);
+    }
+  }
 }
 
-.read-the-docs {
-  color: #888;
+// Mensagem de sucesso no componente Cadastrar
+p {
+  text-align: center;
+  color: $success-color;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 1rem auto;
+  max-width: 500px;
+  padding: 1rem;
+  background-color: rgba($success-color, 0.1);
+  border-radius: $border-radius;
+  border-left: 4px solid $success-color;
+  animation: fadeIn 0.5s ease;
+}
+
+// Componente Realizado
+p:only-child {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  font-size: 1.5rem;
+  margin-top: 50px;
+  background-color: rgba($success-color, 0.1);
+  border-left: 4px solid $success-color;
+  box-shadow: $box-shadow;
+}
+
+// Estilos específicos para o componente BemVindo
+div:has(h1:contains("Bem vindo")) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+  min-height: 70vh;
+  
+  h1 {
+    margin-bottom: 3rem;
+  }
+  
+  button {
+    min-width: 200px;
+    margin: 10px;
+  }
+}
+
+// Responsividade
+@media (max-width: 768px) {
+  form {
+    max-width: 90%;
+    padding: 25px 20px;
+  }
+  
+  h1 {
+    font-size: 2rem;
+    
+    &::after {
+      width: 50px;
+    }
+  }
+  
+  button {
+    padding: 10px 18px;
+  }
+  
+  div:has(h1:contains("Bem vindo")) {
+    button {
+      min-width: 180px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  form {
+    padding: 20px 15px;
+  }
+  
+  h1 {
+    font-size: 1.8rem;
+  }
+  
+  button {
+    padding: 10px 16px;
+    font-size: 0.95rem;
+  }
+  
+  div:has(h1:contains("Bem vindo")) {
+    button {
+      min-width: 85%;
+      margin: 8px 0;
+    }
+  }
+  
+  p:only-child {
+    font-size: 1.2rem;
+    padding: 20px;
+  }
+  
+  input {
+    padding: 10px 12px;
+  }
+}
+
+// Efeito de entrada para todas as páginas
+.BrowserRouter > div {
+  animation: fadeIn 0.5s ease;
+}
+
+// Efeito sutil para campos com foco
+input:focus + div {
+  opacity: 0.8;
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+}
+
+// Efeito de hover para botões
+button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+}
+
+// Efeito para campos com erro
+div:has(div[component="div"]) {
+  position: relative;
+  
+  input {
+    border-color: $error-color;
+    
+    &:focus {
+      border-color: $error-color;
+      box-shadow: 0 0 0 2px rgba($error-color, 0.2);
+    }
+  }
 }
