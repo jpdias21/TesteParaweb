@@ -3,6 +3,7 @@ import {Formik, Form, Field, ErrorMessage} from 'formik'
 import * as Yup from 'yup'
 import axios from 'axios'
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface Values{
     nome: string;
@@ -15,6 +16,9 @@ interface Values{
 
 function Cadastrar() {
     const [cadastroRealizado,setCadastroRealizado] = useState<boolean>(false)
+    const navigate = useNavigate()
+   
+   
     const valitaion = Yup.object({
         nome : Yup.string()
         .min(2,'Nome muito curto')
@@ -77,6 +81,8 @@ function Cadastrar() {
       </Formik>
       <br />
       {cadastroRealizado ? <p>Cadastro realizado com sucesso</p> : ''}
+      <br />
+      {cadastroRealizado ? <button onClick={() => navigate('/login')}>Faça login</button> : ''}
     </>
   )
 }
