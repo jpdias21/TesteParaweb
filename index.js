@@ -24,6 +24,25 @@ app.post("/api/registro", async (req, res) => {
 
   res.json({ mensagem: "Usuário registrado com sucesso!" });
 });
+// Rota de Login
+app.post("/api/login", async (req, res) => {
+  const { email, senha } = req.body;
+
+  // 1. Verifica se o usuário existe
+  const usuario = usuarios.find(user => user.email === email);
+  if (!usuario) {
+    return res.status(404).json({ mensagem: "Usuário não encontrado" });
+  }
+
+  // 2. Compara a senha (criptografada)
+  const senhaCorreta = await bcrypt.compare(senha, usuario.senha);
+  if (!senhaCorreta) {
+    return res.status(401).json({ mensagem: "Senha incorreta" });
+  }
+
+  // 3. Se tudo estiver certo, retorna sucesso
+  res.json({ mensagem: "Login realizado!", nome: usuario.nome });
+});
 
 // ✅ Rota para listar todos os usuários
 app.get("/api/usuarios", (req, res) => {

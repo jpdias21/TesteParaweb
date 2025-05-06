@@ -20,7 +20,7 @@ function Login() {
     validateSchema={valitation}
     onSubmit={async (values : any , {resetForm}) =>{
         try {
-            const response = await axios.get("https://apigenerator.dronahq.com/api/c5NwQzpP/data", values)
+            const response = await axios.get("https://testeparaweb.onrender.com/api/login", values)
             console.log('Login realizado', response.data)
             resetForm()
             navigate('/Realizado')

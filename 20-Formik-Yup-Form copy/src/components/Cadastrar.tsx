@@ -41,7 +41,7 @@ function Cadastrar() {
       validationSchema={valitaion}
       onSubmit={async (values: Values, {resetForm}) => {
         try {
-          const response = await axios.post("http://localhost:5000/api/registro", values)
+          const response = await axios.post("https://testeparaweb.onrender.com/api/registro", values)
           console.log('response', response.data)
           resetForm()
           setCadastroRealizado(true)
