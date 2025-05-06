@@ -1,5 +1,3 @@
-import React from 'react'
-import Cadastrar from './Cadastrar'
 import { useNavigate } from 'react-router-dom'
 
 function BemVindo() {

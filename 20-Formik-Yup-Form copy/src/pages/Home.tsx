@@ -3,7 +3,7 @@ import BemVindo from '../components/BemVindo'
 import Cadastrar from '../components/Cadastrar'
 import Login from '../components/Login'
 import Realizado from '../components/Realizado'
-import { BrowserRouter, Route, Routes, Link } from 'react-router-dom'
+import { BrowserRouter, Route, Routes} from 'react-router-dom'
 
 
 function Home() {
