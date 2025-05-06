@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 
 function Login() {
     const navigate = useNavigate()
-    const valitation = Yup.object({
+    const validation = Yup.object({
         email : Yup.string()
         .email('Digite seu email')
         .required() , 
@@ -17,7 +17,7 @@ function Login() {
     <>
     <Formik 
     initialValues={{email :'', senha: ''}}
-    validateSchema={valitation}
+    validationSchema={validation}
     onSubmit={async (values : any , {resetForm}) =>{
         try {
             const response = await axios.post("https://testeparaweb.onrender.com/api/login", values)
