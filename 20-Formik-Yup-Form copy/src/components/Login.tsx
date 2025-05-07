@@ -2,9 +2,12 @@ import {Formik, Form, Field, ErrorMessage} from 'formik'
 import * as Yup from 'yup'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 
 function Login() {
     const navigate = useNavigate()
+    const [mostraSenha, setMostrarSenha]= useState(false)
+
     const validation = Yup.object({
         email : Yup.string()
         .email('Digite seu email')
@@ -36,7 +39,8 @@ function Login() {
             <ErrorMessage name='email' component='div' />
             <br />
             <label>Senha : </label>
-            <Field name='senha' placeholder='Digite sua senha' />
+            <Field name='senha' placeholder='Digite sua senha' type={mostraSenha ? 'text' : 'password'} />
+            <button type='button' onClick={() => setMostrarSenha(!mostraSenha)}>{mostraSenha ? 'Ocultar senha' : 'Mostrar senha' } </button>
             <ErrorMessage name='senha' />
             <br />
             <button type='submit'>Login</button>

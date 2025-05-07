@@ -11,12 +11,14 @@ interface Values{
     email: string;
     telefone: string;
     senha: string;
+    confirmarSenha : string
 
 }
 
 function Cadastrar() {
     const [cadastroRealizado,setCadastroRealizado] = useState<boolean>(false)
     const navigate = useNavigate()
+    const [mostraSenha, setMostrarSenha]= useState(false)
    
    
     const valitaion = Yup.object({
@@ -36,12 +38,15 @@ function Cadastrar() {
         .required('Numero obrigatorio'),
         senha : Yup.string()
         .min(6,'Senha muito curta')
-        .required('Campo Obrigatorio')
+        .required('Campo Obrigatorio') ,
+        confirmarSenha : Yup.string()
+        .oneOf([Yup.ref('senha')], 'As senhas devem ser iguais')
+        .required('Confirme sua senha')
       })
   return (
     <>
       <Formik
-      initialValues={{nome : '', sobrenome: '', email : '', telefone : '',senha : '',}}
+      initialValues={{nome : '', sobrenome: '', email : '', telefone : '',senha : '', confirmarSenha : ''}}
       validationSchema={valitaion}
       onSubmit={async (values: Values, {resetForm}) => {
         try {
@@ -72,10 +77,13 @@ function Cadastrar() {
           <ErrorMessage name='telefone' component='div'/>
           <br />
           <label>Senha : </label>
-          <Field name='senha' placeholder='Digite uma senha'/>
+          <Field name='senha' placeholder='Digite uma senha' type={mostraSenha ? 'text' : 'password'} />
           <ErrorMessage name='senha' component='div'/>
           <br />
+          <Field name='confirmarSenha' placeholder='confirme sua senha' type={mostraSenha ? 'text' : 'password'} />
           <br />
+          <button type='button' onClick={() => setMostrarSenha(!mostraSenha)}>{mostraSenha ? 'Ocultar senha' : 'Mostrar senha' } </button>
+            <ErrorMessage name='senha' />
           <button type='submit'>Cadastrar</button>
         </Form>
       </Formik>
