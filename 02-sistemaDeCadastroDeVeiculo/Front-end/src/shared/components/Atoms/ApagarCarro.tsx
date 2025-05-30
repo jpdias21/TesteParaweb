@@ -33,6 +33,7 @@ function ApagarCarro() {
         event.preventDefault()
         try {
             const response = await apagarDadosDoCarro(id)
+            console.log('Dados apagado', response.data)
             setCarroApagado(true)
             setCarro(null)
         } catch (error) {

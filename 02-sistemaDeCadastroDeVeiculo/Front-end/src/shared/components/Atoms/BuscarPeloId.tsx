@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { buscarPeloId } from '../../../services/userService'
 
 interface Carro {

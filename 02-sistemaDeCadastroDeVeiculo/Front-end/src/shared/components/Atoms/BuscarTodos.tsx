@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { mostrarTodosCarrosDisponiveis } from '../../../services/userService'
 
 interface Carro {
