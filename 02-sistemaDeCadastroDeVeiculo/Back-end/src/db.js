@@ -1,14 +1,8 @@
 const { Pool } = require('pg');
 
 const pool = new Pool({
-  connectionString: 'postgresql://postgres:052002Joao@@db.xradffjfmtjwlmgwvkjm.supabase.co:5432/postgres',
-  ssl: {
-    rejectUnauthorized: false
-  }
+  connectionString: 'postgresql://postgres.xradffjfmtjwlmgwvkjm:052002Joao@aws-0-sa-east-1.pooler.supabase.com:5432/postgres',
+  ssl: { rejectUnauthorized: false }
 });
-
-pool.connect()
-  .then(() => console.log('Conectado ao banco de dados!'))
-  .catch(err => console.error('Erro de conexão com o banco de dados:', err));
 
 module.exports = pool;
